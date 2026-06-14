@@ -268,3 +268,101 @@ onAuthStateChanged(
     }
 );
 
+import { auth } from "./firebase-config.js";
+
+import {
+    db
+} from "./firebase-config.js";
+
+import {
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const form =
+    document.getElementById(
+        "eventForm"
+    );
+
+const message =
+    document.getElementById(
+        "eventMessage"
+    );
+
+form.addEventListener(
+    "submit",
+    async (e) => {
+
+        e.preventDefault();
+
+        try {
+
+            const user =
+                auth.currentUser;
+
+            if (!user) {
+                throw new Error(
+                    "Not logged in"
+                );
+            }
+
+            await addDoc(
+
+                collection(
+                    db,
+                    "users",
+                    user.uid,
+                    "events"
+                ),
+
+                {
+                    title:
+                        document.getElementById(
+                            "eventTitle"
+                        ).value,
+
+                    date:
+                        document.getElementById(
+                            "eventDate"
+                        ).value,
+
+                    startTime:
+                        document.getElementById(
+                            "eventTime"
+                        ).value,
+
+                    recurrence:
+                        document.getElementById(
+                            "eventRecurrence"
+                        ).value,
+
+                    location:
+                        document.getElementById(
+                            "eventLocation"
+                        ).value,
+
+                    type:
+                        document.getElementById(
+                            "eventType"
+                        ).value,
+
+                    createdAt:
+                        serverTimestamp()
+                }
+            );
+
+            form.reset();
+
+            message.textContent =
+                "Event added successfully.";
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.textContent =
+                "Failed to save event.";
+        }
+    }
+);
