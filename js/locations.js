@@ -140,8 +140,8 @@ export const locations = [
     name: "Wilson Recreation Center",
     aliases: ["Wilson Gym", "Wilson"],
     category: "gym",
-    lat: 35.59484,
-    lng: -78.94033
+    lat: 35.9969378,
+    lng: -78.9408378
   },
   {
     id: "pascal-field-house",
