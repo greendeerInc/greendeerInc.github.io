@@ -1,8 +1,5 @@
 import { locations } from "./locations.js";
 
-console.log("Map JS loaded");
-console.log(locations);
-
 const randomLocation = locations[
   Math.floor(Math.random() * locations.length)
 ];
@@ -12,15 +9,26 @@ const map = L.map("map").setView(
   17
 );
 
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
-L.marker([randomLocation.lat, randomLocation.lng])
-  .addTo(map)
-  .bindPopup(`
-    <strong>${randomLocation.name}</strong><br>
-    Category: ${randomLocation.category}
-  `)
-  .openPopup();
+const avatarIcon = L.divIcon({
+  className: "avatar-marker",
+  html: `
+    <div class="avatar-wrapper">
+      <img src="avatars/2.png" alt="avatar">
+    </div>
+  `,
+  iconSize: [32, 32],     // smaller marker
+  iconAnchor: [16, 16],   // center the marker
+  popupAnchor: [0, -16]
+});
+
+L.marker(
+  [randomLocation.lat, randomLocation.lng],
+  { icon: avatarIcon }
+)
+.addTo(map)
+.bindPopup(randomLocation.name);
