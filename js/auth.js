@@ -7,11 +7,15 @@ import {
 
 export function protectPage() {
     onAuthStateChanged(auth, (user) => {
+
         if (!user) {
             window.location.replace(
                 "login.html"
             );
+            return;
         }
+
+        document.body.style.display = "block";
     });
 }
 

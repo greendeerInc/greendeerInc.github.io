@@ -1,143 +1,48 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>DukeLink Dashboard</title>
+
+    <link rel="stylesheet" href="css/dashboard.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
+<body style="display:none;">
 
-<body>
+    <div class="background-glow"></div>
 
-    <nav id="sidebar" class="sidebar collapsed">
-
-        <div class="sidebar-header">
-
-            <button id="sidebarToggle" class="sidebar-toggle">
-
-                ☰
-
-            </button>
-
-            <span class="sidebar-title">
-                Duke Portal
-            </span>
-
+    <header class="topbar">
+        <div class="logo-section">
+            <h1>DukeLink</h1>
+            <span>Connected Campus</span>
         </div>
 
-        <div class="sidebar-content">
-
-            <a href="dashboard.html" class="sidebar-link" data-page="dashboard">
-
-                <span class="icon">🏠</span>
-
-                <span class="label">
-                    Dashboard
-                </span>
-
-            </a>
-
-            <a href="profile.html" class="sidebar-link" data-page="profile">
-
-                <span class="icon">👤</span>
-
-                <span class="label">
-                    Profile
-                </span>
-
-            </a>
-
-            <a href="locations.html" class="sidebar-link" data-page="locations">
-
-                <span class="icon">📄</span>
-
-                <span class="label">
-                    Locations
-                </span>
-
-            </a>
-
-            <a href="page2.html" class="sidebar-link" data-page="page2">
-
-                <span class="icon">⚙️</span>
-
-                <span class="label">
-                    Page 2
-                </span>
-
-            </a>
-
+        <div class="user-info">
+            <span id="currentUserName">Loading...</span>
         </div>
+    </header>
 
-        <div class="sidebar-footer">
+    <main class="dashboard-container">
 
-            <button id="logoutBtn" class="logout-btn">
+        <section class="dashboard-header">
+            <h2>Your Network</h2>
+            <p>See what everyone is doing right now.</p>
+        </section>
 
-                Logout
+        <section id="usersGrid" class="users-grid">
 
-            </button>
-
-        </div>
-
-    </nav>
-
-    <div class="container">
-
-        <main class="main-content">
-
-            <div class="card">
-
-                <h1>Dashboard</h1>
-
+            <div class="loading-card">
+                Loading users...
             </div>
 
-            <div class="card">
+        </section>
 
-                <div class="dashboard-header">
-
-                    <h1>
-                        Community
-                    </h1>
-
-                </div>
-
-                <div id="usersContainer">
-
-                </div>
-
-            </div>
-
-            <div class="user-card">
-
-                <img src="avatars/3.png">
-
-                <div>
-
-                    <h3>Mark</h3>
-
-                    <p>Working on ECE homework</p>
-
-                </div>
-
-            </div>
-
-        </main>
-
-    </div>
-
-    <script type="module" src="js/sidebar.js">
-    </script>
+    </main>
 
     <script type="module" src="js/dashboard.js"></script>
 
-    <script type="module">
-        import { protectPage } from "./js/auth.js";
-        protectPage();
-    </script>
-
-    <script type="module" src="js/app.js"></script>
-
 </body>
-
 </html>

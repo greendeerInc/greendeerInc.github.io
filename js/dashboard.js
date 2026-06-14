@@ -1,153 +1,110 @@
+import { protectPage } from "./auth.js";
+
+protectPage();
+
 import {
+    getFirestore,
     collection,
-    onSnapshot,
     getDocs
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+
+import {
+    getAuth
+} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+const db = getFirestore();
+const auth = getAuth();
+
+const usersGrid = document.getElementById("usersGrid");
+const currentUserName = document.getElementById("currentUserName");
+
+function timeAgo(timestamp) {
+
+    if (!timestamp) return "Unknown";
+
+    const now = Date.now();
+    const then = timestamp.toDate().getTime();
+
+    const diff = Math.floor((now - then) / 1000);
+
+    if (diff < 60) return "Just now";
+    if (diff < 3600) return `${Math.floor(diff / 60)} min ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)} hr ago`;
+
+    return `${Math.floor(diff / 86400)} day ago`;
 }
-    from
-    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-async function loadUsers() {
+function createUserCard(user) {
 
-    const container =
-        document.getElementById(
-            "usersContainer"
-        );
-
-    container.innerHTML = "";
-
-    const snapshot =
-        await getDocs(
-            collection(
-                db,
-                "users"
-            )
-        );
-
-    snapshot.forEach((doc) => {
-
-        const user =
-            doc.data();
-
-        container.innerHTML += `
-
+    return `
         <div class="user-card">
 
-            <img
-                src="avatars/${user.avatar || '1.png'}">
+            <div class="user-header">
 
-            <div>
+                <img
+                    class="avatar"
+                    src="avatars/${user.avatar}"
+                    alt="${user.profileName}"
+                >
 
-                <h3>
-                    ${user.profileName}
-                </h3>
-
-                <p>
-                    ${user.status || ''}
-                </p>
+                <div>
+                    <div class="user-name">
+                        ${user.profileName}
+                    </div>
+                </div>
 
             </div>
 
+            <div class="status">
+                ${user.status || "No status"}
+            </div>
+
+            <div class="last-updated">
+                Updated ${timeAgo(user.lastUpdated)}
+            </div>
+
         </div>
-
-        `;
-    });
-
+    `;
 }
 
-const sidebar =
-    document.getElementById("sidebar");
+async function loadUsers() {
 
-const menuBtn =
-    document.getElementById("menuBtn");
+    try {
 
-menuBtn.addEventListener("click", () => {
+        const snapshot = await getDocs(
+            collection(db, "users")
+        );
 
-    if (window.innerWidth <= 768) {
+        let html = "";
 
-        sidebar.classList.toggle("open");
+        snapshot.forEach(doc => {
 
-    } else {
+            const user = doc.data();
 
-        sidebar.classList.toggle("collapsed");
+            html += createUserCard(user);
 
+            if (
+                auth.currentUser &&
+                doc.id === auth.currentUser.uid
+            ) {
+                currentUserName.textContent =
+                    user.profileName;
+            }
+
+        });
+
+        usersGrid.innerHTML = html;
+
+    } catch (error) {
+
+        console.error(error);
+
+        usersGrid.innerHTML = `
+            <div class="loading-card">
+                Failed to load users.
+            </div>
+        `;
     }
-
-});
-
-document
-    .getElementById(
-        "reloadBtn"
-    )
-    .addEventListener(
-        "click",
-        loadUsers
-    );
+}
 
 loadUsers();
-
-const usersContainer =
-    document.getElementById(
-        "usersContainer"
-    );
-
-onSnapshot(
-    collection(
-        db,
-        "users"
-    ),
-    (snapshot) => {
-
-        usersContainer.innerHTML = "";
-
-        snapshot.forEach(
-            (doc) => {
-
-                const user =
-                    doc.data();
-
-                usersContainer.innerHTML += `
-                <div class="user-card">
-
-                    <img
-                        src="avatars/${user.avatar ||
-                    "1.png"
-                    }">
-
-                    <div class="user-info">
-
-                        <div class="user-name">
-                            ${user.profileName ||
-                    "Unknown User"
-                    }
-                        </div>
-
-                        <div class="user-status">
-                            ${user.status ||
-                    "No status"
-                    }
-                        </div>
-
-                    </div>
-
-                </div>
-                `;
-            }
-        );
-    }
-);
-
-await setDoc(
-    doc(
-        db,
-        "users",
-        user.uid
-    ),
-    {
-        profileName,
-        avatar: "1.png",
-        status: "",
-        email,
-        createdAt:
-            serverTimestamp()
-    }
-);
