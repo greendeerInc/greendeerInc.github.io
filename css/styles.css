@@ -75,7 +75,7 @@ body {
     background: white;
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.08);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
 }
 
 /* Login */
@@ -85,11 +85,9 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(
-        135deg,
-        var(--duke-blue),
-        white
-    );
+    background: linear-gradient(135deg,
+            var(--duke-blue),
+            white);
 }
 
 .login-card {
@@ -97,7 +95,7 @@ body {
     padding: 40px;
     border-radius: 16px;
     width: 350px;
-    box-shadow: 0 8px 25px rgba(0,0,0,.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .1);
 }
 
 .login-card h2 {
@@ -130,10 +128,8 @@ body {
 #usersContainer {
     display: grid;
     grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(320px, 1fr)
-        );
+        repeat(auto-fill,
+            minmax(320px, 1fr));
     gap: 16px;
 }
 
@@ -152,7 +148,7 @@ body {
     border: 1px solid #edf2f7;
 
     box-shadow:
-        0 4px 12px rgba(0,0,0,.05);
+        0 4px 12px rgba(0, 0, 0, .05);
 
     transition:
         transform .2s ease,
@@ -164,7 +160,7 @@ body {
     transform: translateY(-2px);
 
     box-shadow:
-        0 8px 20px rgba(0,0,0,.08);
+        0 8px 20px rgba(0, 0, 0, .08);
 }
 
 .user-info {
@@ -224,7 +220,7 @@ body {
     border-radius: 14px;
 
     box-shadow:
-        0 3px 10px rgba(0,0,0,.05);
+        0 3px 10px rgba(0, 0, 0, .05);
 }
 
 .menu-btn {
@@ -262,7 +258,7 @@ body {
     background: white;
 
     box-shadow:
-        2px 0 15px rgba(0,0,0,.08);
+        2px 0 15px rgba(0, 0, 0, .08);
 
     display: flex;
 
@@ -330,13 +326,13 @@ body {
 .sidebar-link:hover {
 
     background:
-        rgba(141,185,232,.15);
+        rgba(141, 185, 232, .15);
 }
 
 .sidebar-link.active {
 
     background:
-        rgba(141,185,232,.25);
+        rgba(141, 185, 232, .25);
 
     border-right:
         4px solid #5d91cb;
@@ -379,7 +375,7 @@ body {
     transition: margin-left .3s;
 }
 
-.sidebar.collapsed ~ .container {
+.sidebar.collapsed~.container {
 
     margin-left: 70px;
 }
@@ -419,8 +415,7 @@ body {
     padding: 30px;
 
     box-shadow:
-        0 10px 30px
-        rgba(0,0,0,.08);
+        0 10px 30px rgba(0, 0, 0, .08);
 }
 
 .profile-card h1 {
@@ -478,13 +473,10 @@ body {
     border-color: #5d91cb;
 
     box-shadow:
-        0 0 0 4px
-        rgba(
-            93,
+        0 0 0 4px rgba(93,
             145,
             203,
-            .15
-        );
+            .15);
 
     background: white;
 }
@@ -503,4 +495,3 @@ body {
 
     color: #9ca3af;
 }
-

@@ -12,7 +12,7 @@
   border: 2px solid white;
 
   /* subtle shadow */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 
   overflow: hidden;
 }

@@ -37,12 +37,12 @@ document.addEventListener(
 
         const currentPage =
             window.location.pathname
-            .split("/")
-            .pop()
-            .replace(
-                ".html",
-                ""
-            );
+                .split("/")
+                .pop()
+                .replace(
+                    ".html",
+                    ""
+                );
 
         document
             .querySelectorAll(
@@ -70,13 +70,13 @@ document.addEventListener(
 import {
     logout
 }
-from "./auth.js";
+    from "./auth.js";
 
 document
-.getElementById(
-    "logoutBtn"
-)
-?.addEventListener(
-    "click",
-    logout
-);
+    .getElementById(
+        "logoutBtn"
+    )
+    ?.addEventListener(
+        "click",
+        logout
+    );

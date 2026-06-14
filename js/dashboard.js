@@ -3,30 +3,30 @@ import {
     onSnapshot,
     getDocs
 }
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    from
+    "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-async function loadUsers(){
+async function loadUsers() {
 
     const container =
-    document.getElementById(
-        "usersContainer"
-    );
+        document.getElementById(
+            "usersContainer"
+        );
 
     container.innerHTML = "";
 
     const snapshot =
-    await getDocs(
-        collection(
-            db,
-            "users"
-        )
-    );
+        await getDocs(
+            collection(
+                db,
+                "users"
+            )
+        );
 
-    snapshot.forEach((doc)=>{
+    snapshot.forEach((doc) => {
 
         const user =
-        doc.data();
+            doc.data();
 
         container.innerHTML += `
 
@@ -55,10 +55,10 @@ async function loadUsers(){
 }
 
 const sidebar =
-document.getElementById("sidebar");
+    document.getElementById("sidebar");
 
 const menuBtn =
-document.getElementById("menuBtn");
+    document.getElementById("menuBtn");
 
 menuBtn.addEventListener("click", () => {
 
@@ -75,59 +75,56 @@ menuBtn.addEventListener("click", () => {
 });
 
 document
-.getElementById(
-    "reloadBtn"
-)
-.addEventListener(
-    "click",
-    loadUsers
-);
+    .getElementById(
+        "reloadBtn"
+    )
+    .addEventListener(
+        "click",
+        loadUsers
+    );
 
 loadUsers();
 
 const usersContainer =
-document.getElementById(
-    "usersContainer"
-);
+    document.getElementById(
+        "usersContainer"
+    );
 
 onSnapshot(
     collection(
         db,
         "users"
     ),
-    (snapshot)=>{
+    (snapshot) => {
 
         usersContainer.innerHTML = "";
 
         snapshot.forEach(
-            (doc)=>{
+            (doc) => {
 
                 const user =
-                doc.data();
+                    doc.data();
 
                 usersContainer.innerHTML += `
                 <div class="user-card">
 
                     <img
-                        src="avatars/${
-                            user.avatar ||
-                            "1.png"
-                        }">
+                        src="avatars/${user.avatar ||
+                    "1.png"
+                    }">
 
                     <div class="user-info">
 
                         <div class="user-name">
-                            ${
-                                user.profileName ||
-                                "Unknown User"
-                            }
+                            ${user.profileName ||
+                    "Unknown User"
+                    }
                         </div>
 
                         <div class="user-status">
-                            ${
-                                user.status ||
-                                "No status"
-                            }
+                            ${user.status ||
+                    "No status"
+                    }
                         </div>
 
                     </div>

@@ -1,5 +1,5 @@
 import { auth, db }
-from "./firebase-config.js";
+    from "./firebase-config.js";
 
 import {
     doc,
@@ -7,12 +7,12 @@ import {
     setDoc,
     serverTimestamp
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
     onAuthStateChanged
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 let selectedAvatar = "1.png";
 

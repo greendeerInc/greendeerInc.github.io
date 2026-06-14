@@ -1,10 +1,10 @@
 import { auth }
-from "./firebase-config.js";
+    from "./firebase-config.js";
 
 import {
     signInWithEmailAndPassword
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 const loginBtn =
     document.getElementById(
@@ -45,7 +45,7 @@ loginBtn.addEventListener(
 
         } catch (error) {
 
-            switch(error.code){
+            switch (error.code) {
 
                 case "auth/invalid-email":
                     errorDiv.textContent =
@@ -81,7 +81,7 @@ document.addEventListener(
     "keydown",
     (event) => {
 
-        if(event.key === "Enter"){
+        if (event.key === "Enter") {
 
             loginBtn.click();
 
@@ -92,13 +92,13 @@ document.addEventListener(
 import {
     onAuthStateChanged
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 onAuthStateChanged(
     auth,
     (user) => {
 
-        if(user){
+        if (user) {
 
             window.location.href =
                 "dashboard.html";

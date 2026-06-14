@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
 
-<div class="login-container">
-    <div class="login-card">
-        <h2>Portal Login</h2>
+    <div class="login-container">
+        <div class="login-card">
+            <h2>Portal Login</h2>
 
-        <input
-            type="email"
-            id="email"
-            placeholder="Email">
+            <input type="email" id="email" placeholder="Email">
 
-        <input
-            type="password"
-            id="password"
-            placeholder="Password">
+            <input type="password" id="password" placeholder="Password">
 
-        <button id="loginBtn">
-            Login
-        </button>
+            <button id="loginBtn">
+                Login
+            </button>
 
-        <div id="loginError"></div>
+            <div id="loginError"></div>
 
-        <p style="text-align:center; margin-top:15px;">
-            Don't have an account?
-            <a href="register.html">
-                Create one
-            </a>
-        </p>
+            <p style="text-align:center; margin-top:15px;">
+                Don't have an account?
+                <a href="register.html">
+                    Create one
+                </a>
+            </p>
+        </div>
     </div>
-</div>
 
-<script type="module" src="js/login.js"></script>
+    <script type="module" src="js/login.js"></script>
 
-<script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/auth.js"></script>
 
 </body>
+
 </html>

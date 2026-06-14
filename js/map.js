@@ -30,5 +30,5 @@ L.marker(
   [randomLocation.lat, randomLocation.lng],
   { icon: avatarIcon }
 )
-.addTo(map)
-.bindPopup(randomLocation.name);
+  .addTo(map)
+  .bindPopup(randomLocation.name);

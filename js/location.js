@@ -112,27 +112,27 @@ const locations = [
     lng: -78.9417
   },
   {
-  id: "wilson-gym",
-  name: "Wilson Recreation Center",
-  aliases: ["Wilson Gym", "Wilson"],
-  category: "gym",
-  lat: 36.0063,
-  lng: -78.9396
-},
-{
-  id: "pascal-field-house",
-  name: "Pascal Field House",
-  aliases: ["Pascal"],
-  category: "athletics",
-  lat: 36.0070,
-  lng: -78.9404
-},
-{
-  id: "morris-williams-track",
-  name: "Morris Williams Track & Field Stadium",
-  aliases: ["Track", "Track & Field", "Morris Williams"],
-  category: "athletics",
-  lat: 36.0077,
-  lng: -78.9411
-}
+    id: "wilson-gym",
+    name: "Wilson Recreation Center",
+    aliases: ["Wilson Gym", "Wilson"],
+    category: "gym",
+    lat: 36.0063,
+    lng: -78.9396
+  },
+  {
+    id: "pascal-field-house",
+    name: "Pascal Field House",
+    aliases: ["Pascal"],
+    category: "athletics",
+    lat: 36.0070,
+    lng: -78.9404
+  },
+  {
+    id: "morris-williams-track",
+    name: "Morris Williams Track & Field Stadium",
+    aliases: ["Track", "Track & Field", "Morris Williams"],
+    category: "athletics",
+    lat: 36.0077,
+    lng: -78.9411
+  }
 ];

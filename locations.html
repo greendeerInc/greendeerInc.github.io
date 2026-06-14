@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Locations</title>
+    <title>Locations</title>
 
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/locations.css">
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/locations.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
 
-    #map {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      background: lightgray;
-    }
-  </style>
+        #map {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: lightgray;
+        }
+    </style>
 </head>
 
 <body>
 
-  <nav id="sidebar" class="sidebar">
+    <nav id="sidebar" class="sidebar">
 
         <div class="sidebar-header">
 
-            <button
-                id="sidebarToggle"
-                class="sidebar-toggle">
+            <button id="sidebarToggle" class="sidebar-toggle">
 
                 ☰
 
@@ -49,10 +45,7 @@
 
         <div class="sidebar-content">
 
-            <a
-                href="dashboard.html"
-                class="sidebar-link"
-                data-page="dashboard">
+            <a href="dashboard.html" class="sidebar-link" data-page="dashboard">
 
                 <span class="icon">🏠</span>
 
@@ -62,10 +55,7 @@
 
             </a>
 
-            <a
-                href="profile.html"
-                class="sidebar-link"
-                data-page="profile">
+            <a href="profile.html" class="sidebar-link" data-page="profile">
 
                 <span class="icon">👤</span>
 
@@ -75,10 +65,7 @@
 
             </a>
 
-            <a
-                href="locations.html"
-                class="sidebar-link"
-                data-page="locations">
+            <a href="locations.html" class="sidebar-link" data-page="locations">
 
                 <span class="icon">📄</span>
 
@@ -88,10 +75,7 @@
 
             </a>
 
-            <a
-                href="page2.html"
-                class="sidebar-link"
-                data-page="page2">
+            <a href="page2.html" class="sidebar-link" data-page="page2">
 
                 <span class="icon">⚙️</span>
 
@@ -105,9 +89,7 @@
 
         <div class="sidebar-footer">
 
-            <button
-                id="logoutBtn"
-                class="logout-btn">
+            <button id="logoutBtn" class="logout-btn">
 
                 Logout
 
@@ -115,25 +97,24 @@
 
         </div>
 
-</nav>
+    </nav>
 
-<div class="container">
+    <div class="container">
 
-    <main class="main-content">  
-    <div id="map"></div>
-</main>
-</div>
+        <main class="main-content">
+            <div id="map"></div>
+        </main>
+    </div>
 
 
-<script type="module"
-        src="js/sidebar.js">
-</script>
+    <script type="module" src="js/sidebar.js">
+    </script>
 
-<script type="module">
-    import { protectPage } from "./js/auth.js";
-    protectPage();
-</script>
+    <script type="module">
+        import { protectPage } from "./js/auth.js";
+        protectPage();
+    </script>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="js/map.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/map.js"></script>
 </body>
