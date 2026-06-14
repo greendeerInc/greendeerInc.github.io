@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Duke Campus Map</title>
+  <title>Locations</title>
 
+  <link rel="stylesheet" href="css/styles.css">
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
-
   <style>
     html,
     body {
@@ -17,6 +17,8 @@
     }
 
     #map {
+      margin: 0;
+      padding: 0;
       height: 100%;
       width: 100%;
       background: lightgray;
@@ -25,8 +27,107 @@
 </head>
 
 <body>
-  <div id="map"></div>
+
+  <nav id="sidebar" class="sidebar">
+
+        <div class="sidebar-header">
+
+            <button
+                id="sidebarToggle"
+                class="sidebar-toggle">
+
+                ☰
+
+            </button>
+
+            <span class="sidebar-title">
+                Duke Portal
+            </span>
+
+        </div>
+
+        <div class="sidebar-content">
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+                data-page="dashboard">
+
+                <span class="icon">🏠</span>
+
+                <span class="label">
+                    Dashboard
+                </span>
+
+            </a>
+
+            <a
+                href="profile.html"
+                class="sidebar-link"
+                data-page="profile">
+
+                <span class="icon">👤</span>
+
+                <span class="label">
+                    Profile
+                </span>
+
+            </a>
+
+            <a
+                href="locations.html"
+                class="sidebar-link"
+                data-page="locations">
+
+                <span class="icon">📄</span>
+
+                <span class="label">
+                    Locations
+                </span>
+
+            </a>
+
+            <a
+                href="page2.html"
+                class="sidebar-link"
+                data-page="page2">
+
+                <span class="icon">⚙️</span>
+
+                <span class="label">
+                    Page 2
+                </span>
+
+            </a>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <button
+                id="logoutBtn"
+                class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </div>
+
+</nav>
+
+<div class="container">
+
+    <main class="main-content">  
+    <div id="map"></div>
+</main>
+</div>
+
+
+<script type="module"
+        src="js/sidebar.js">
+</script>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script type="module" src="./js/map.js"></script>
+  <script type="module" src="js/map.js"></script>
 </body>
