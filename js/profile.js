@@ -4,78 +4,59 @@ from "./firebase-config.js";
 import {
     doc,
     getDoc,
-    updateDoc
+    setDoc,
+    serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import {
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 let selectedAvatar = "1.png";
 
 const avatarGrid =
-document.getElementById("avatarGrid");
-
-for(let i = 1; i <= 10; i++){
-
-    const img =
-    document.createElement("img");
-
-    img.src =
-    `avatars/${i}.png`;
-
-    img.classList.add(
-        "avatar-option"
+    document.getElementById(
+        "avatarGrid"
     );
 
-    img.onclick = () => {
+const currentAvatar =
+    document.getElementById(
+        "currentAvatar"
+    );
 
-        selectedAvatar =
-        `${i}.png`;
+const profileNameInput =
+    document.getElementById(
+        "profileName"
+    );
 
-        document
-        .getElementById(
-            "currentAvatar"
-        )
-        .src =
-        img.src;
-    };
+const statusInput =
+    document.getElementById(
+        "status"
+    );
 
-    avatarGrid.appendChild(img);
-}
+const saveButton =
+    document.getElementById(
+        "saveProfileBtn"
+    );
 
-await updateDoc(
-    doc(
-        db,
-        "users",
-        auth.currentUser.uid
-    ),
-    {
-        profileName:
-            profileName.value,
-
-        status:
-            status.value,
-
-        avatar:
-            selectedAvatar,
-
-        lastUpdated:
-            serverTimestamp()
-    }
-);
-
-function buildAvatarPicker(){
+function buildAvatarPicker() {
 
     avatarGrid.innerHTML = "";
 
-    for(let i = 1; i <= 10; i++){
+    for (let i = 1; i <= 10; i++) {
 
         const avatar =
-        document.createElement("img");
+            document.createElement(
+                "img"
+            );
 
         avatar.src =
-        `avatars/${i}.png`;
+            `avatars/${i}.png`;
 
         avatar.dataset.avatar =
-        `${i}.png`;
+            `${i}.png`;
 
         avatar.classList.add(
             "avatar-option"
@@ -86,28 +67,26 @@ function buildAvatarPicker(){
             () => {
 
                 selectedAvatar =
-                `${i}.png`;
+                    `${i}.png`;
 
                 document
-                .querySelectorAll(
-                    ".avatar-option"
-                )
-                .forEach(el =>
-                    el.classList.remove(
-                        "selected"
+                    .querySelectorAll(
+                        ".avatar-option"
                     )
-                );
+                    .forEach(img => {
+
+                        img.classList.remove(
+                            "selected"
+                        );
+
+                    });
 
                 avatar.classList.add(
                     "selected"
                 );
 
-                document
-                .getElementById(
-                    "currentAvatar"
-                )
-                .src =
-                avatar.src;
+                currentAvatar.src =
+                    avatar.src;
             }
         );
 
@@ -117,104 +96,147 @@ function buildAvatarPicker(){
     }
 }
 
+async function loadProfile(user) {
 
-async function loadProfile(){
+    try {
 
-    const userRef =
-    doc(
-        db,
-        "users",
-        auth.currentUser.uid
-    );
-
-    const userSnap =
-    await getDoc(userRef);
-
-    if(!userSnap.exists()) return;
-
-    const user =
-    userSnap.data();
-
-    document
-    .getElementById(
-        "profileName"
-    )
-    .value =
-    user.profileName || "";
-
-    document
-    .getElementById(
-        "status"
-    )
-    .value =
-    user.status || "";
-
-    selectedAvatar =
-    user.avatar || "1.png";
-
-    document
-    .getElementById(
-        "currentAvatar"
-    )
-    .src =
-    `avatars/${selectedAvatar}`;
-
-    document
-    .querySelectorAll(
-        ".avatar-option"
-    )
-    .forEach(img => {
-
-        if(
-            img.dataset.avatar ===
-            selectedAvatar
-        ){
-            img.classList.add(
-                "selected"
-            );
-        }
-
-    });
-}
-
-
-document
-.getElementById(
-    "saveProfileBtn"
-)
-.addEventListener(
-    "click",
-    async () => {
-
-        await updateDoc(
+        const userRef =
             doc(
                 db,
                 "users",
-                auth.currentUser.uid
+                user.uid
+            );
+
+        const userSnap =
+            await getDoc(
+                userRef
+            );
+
+        if (!userSnap.exists()) {
+
+            return;
+        }
+
+        const data =
+            userSnap.data();
+
+        profileNameInput.value =
+            data.profileName || "";
+
+        statusInput.value =
+            data.status || "";
+
+        selectedAvatar =
+            data.avatar || "1.png";
+
+        currentAvatar.src =
+            `avatars/${selectedAvatar}`;
+
+        document
+            .querySelectorAll(
+                ".avatar-option"
+            )
+            .forEach(img => {
+
+                if (
+                    img.dataset.avatar ===
+                    selectedAvatar
+                ) {
+
+                    img.classList.add(
+                        "selected"
+                    );
+                }
+            });
+
+    } catch (error) {
+
+        console.error(
+            "Error loading profile:",
+            error
+        );
+    }
+}
+
+async function saveProfile() {
+
+    try {
+
+        const user =
+            auth.currentUser;
+
+        if (!user) {
+
+            alert(
+                "Not logged in."
+            );
+
+            return;
+        }
+
+        await setDoc(
+            doc(
+                db,
+                "users",
+                user.uid
             ),
             {
                 profileName:
-                    document
-                    .getElementById(
-                        "profileName"
-                    )
-                    .value,
+                    profileNameInput.value.trim(),
 
                 status:
-                    document
-                    .getElementById(
-                        "status"
-                    )
-                    .value,
+                    statusInput.value.trim(),
 
                 avatar:
-                    selectedAvatar
+                    selectedAvatar,
+
+                email:
+                    user.email,
+
+                lastUpdated:
+                    serverTimestamp()
+            },
+            {
+                merge: true
             }
         );
 
         alert(
-            "Profile updated."
+            "Profile saved."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Save failed:",
+            error
+        );
+
+        alert(
+            "Error saving profile. Check console."
         );
     }
+}
+
+saveButton.addEventListener(
+    "click",
+    saveProfile
 );
 
+buildAvatarPicker();
+
+onAuthStateChanged(
+    auth,
+    (user) => {
+
+        if (!user) {
+
+            window.location.href =
+                "login.html";
+
+            return;
+        }
+
+        loadProfile(user);
+    }
+);
