@@ -14,19 +14,21 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
-const avatarIcon = L.icon({
-  iconUrl: "../avatar/2.png",
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
-  popupAnchor: [0, -40]
+const avatarIcon = L.divIcon({
+  className: "avatar-marker",
+  html: `
+    <div class="avatar-wrapper">
+      <img src="avatars/2.png" alt="avatar">
+    </div>
+  `,
+  iconSize: [32, 32],     // smaller marker
+  iconAnchor: [16, 16],   // center the marker
+  popupAnchor: [0, -16]
 });
 
-L.marker([randomLocation.lat, randomLocation.lng], {
-  icon: avatarIcon
-})
-  .addTo(map)
-  .bindPopup(`
-    <strong>${randomLocation.name}</strong><br>
-    Category: ${randomLocation.category}
-  `)
-  .openPopup();
+L.marker(
+  [randomLocation.lat, randomLocation.lng],
+  { icon: avatarIcon }
+)
+.addTo(map)
+.bindPopup(randomLocation.name);
