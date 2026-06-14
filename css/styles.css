@@ -270,10 +270,7 @@ body {
     z-index: 1000;
 }
 
-.sidebar.collapsed {
 
-    width: 70px;
-}
 
 .sidebar-header {
 
@@ -363,11 +360,7 @@ body {
     cursor: pointer;
 }
 
-.sidebar.collapsed .label,
-.sidebar.collapsed .sidebar-title {
 
-    display: none;
-}
 
 .container {
 
@@ -376,10 +369,7 @@ body {
     transition: margin-left .3s;
 }
 
-.sidebar.collapsed~.container {
 
-    margin-left: 70px;
-}
 
 @media (max-width:768px) {
 
@@ -495,4 +485,17 @@ body {
 .profile-card textarea::placeholder {
 
     color: #9ca3af;
+}
+
+@media (min-width: 769px) {
+    .sidebar.collapsed {
+        width: 70px;
+    }
+    .sidebar.collapsed .label,
+    .sidebar.collapsed .sidebar-title {
+        display: none;
+    }
+    .sidebar.collapsed ~ .container {
+        margin-left: 70px;
+    }
 }
