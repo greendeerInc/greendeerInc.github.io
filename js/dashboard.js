@@ -1,5 +1,6 @@
 import {
     collection,
+    onSnapshot,
     getDocs
 }
 from
@@ -84,38 +85,72 @@ document
 
 loadUsers();
 
-import {
-    onSnapshot,
-    collection
-}
-from
-"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const usersContainer =
+document.getElementById(
+    "usersContainer"
+);
 
 onSnapshot(
-    collection(db,"users"),
-    ()=>{
-        loadUsers();
+    collection(
+        db,
+        "users"
+    ),
+    (snapshot)=>{
+
+        usersContainer.innerHTML = "";
+
+        snapshot.forEach(
+            (doc)=>{
+
+                const user =
+                doc.data();
+
+                usersContainer.innerHTML += `
+                <div class="user-card">
+
+                    <img
+                        src="avatars/${
+                            user.avatar ||
+                            "1.png"
+                        }">
+
+                    <div class="user-info">
+
+                        <div class="user-name">
+                            ${
+                                user.profileName ||
+                                "Unknown User"
+                            }
+                        </div>
+
+                        <div class="user-status">
+                            ${
+                                user.status ||
+                                "No status"
+                            }
+                        </div>
+
+                    </div>
+
+                </div>
+                `;
+            }
+        );
     }
 );
 
-container.innerHTML += `
-<div class="user-card">
-
-    <img
-        src="avatars/${user.avatar || '1.png'}"
-        alt="Avatar">
-
-    <div class="user-info">
-
-        <div class="user-name">
-            ${user.profileName}
-        </div>
-
-        <div class="user-status">
-            ${user.status || "No status set"}
-        </div>
-
-    </div>
-
-</div>
-`;
+await setDoc(
+    doc(
+        db,
+        "users",
+        user.uid
+    ),
+    {
+        profileName,
+        avatar: "1.png",
+        status: "",
+        email,
+        createdAt:
+            serverTimestamp()
+    }
+);
