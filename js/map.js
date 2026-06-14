@@ -15,7 +15,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const avatarIcon = L.icon({
-  iconUrl: "../images/avatar.png",
+  iconUrl: "../avatar/2.png",
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -40]
