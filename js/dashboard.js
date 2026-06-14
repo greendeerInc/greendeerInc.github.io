@@ -1,19 +1,15 @@
 import { protectPage } from "./auth.js";
-
-protectPage();
-
+import { db, auth } from "./firebase-config.js";
 import {
-    getFirestore,
     collection,
     getDocs
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import {
-    getAuth
-} from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+const usersSnapshot = await getDocs(
+    collection(db, "users")
+);
 
-const db = getFirestore();
-const auth = getAuth();
+protectPage();
 
 const usersGrid = document.getElementById("usersGrid");
 const currentUserName = document.getElementById("currentUserName");
@@ -71,21 +67,31 @@ async function loadUsers() {
 
     try {
 
-        const snapshot = await getDocs(
+        const usersSnapshot = await getDocs(
             collection(db, "users")
         );
 
-        let html = "";
+        usersGrid.innerHTML = "";
 
-        snapshot.forEach(doc => {
+        usersSnapshot.forEach((docSnap) => {
 
-            const user = doc.data();
+            const userData = docSnap.data();
 
-            html += createUserCard(user);
+            const user = {
+                uid: docSnap.id,
+                profileName: userData.profileName || "Unknown User",
+                status: userData.status || "Available",
+                avatar: userData.avatar || "default.png",
+                email: userData.email || "",
+                createdAt: userData.createdAt,
+                lastUpdated: userData.lastUpdated
+            };
+
+            usersGrid.innerHTML += createUserCard(user);
 
             if (
                 auth.currentUser &&
-                doc.id === auth.currentUser.uid
+                user.uid === auth.currentUser.uid
             ) {
                 currentUserName.textContent =
                     user.profileName;
@@ -93,11 +99,12 @@ async function loadUsers() {
 
         });
 
-        usersGrid.innerHTML = html;
-
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Error loading users:",
+            error
+        );
 
         usersGrid.innerHTML = `
             <div class="loading-card">
@@ -106,5 +113,4 @@ async function loadUsers() {
         `;
     }
 }
-
 loadUsers();
