@@ -1,7 +1,12 @@
 import { locations } from "./locations.js";
+import { db, auth } from "./firebase.js";
+import {
+  collection,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const map = L.map("map").setView(
-  [36.0015, -78.9395], // Center on Duke West Campus
+  [36.0015, -78.9395],
   16
 );
 
@@ -10,74 +15,72 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors"
 }).addTo(map);
 
-const people = [
-  {
-    name: "Anna",
-    avatar: "avatars/Anna.png",
-    locationId: "perkins-library",
-    status: "Studying",
-    leavingAt: "4:30 PM",
-    nextBreakIn: "1 hour 15 minutes"
-  },
-  {
-    name: "Ryan",
-    avatar: "avatars/Ryan.png",
-    locationId: "brodhead-center",
-    status: "Eating",
-    leavingAt: "2:15 PM",
-    nextBreakIn: "45 minutes"
-  },
-  {
-    name: "Mark",
-    avatar: "avatars/Mark.png",
-    locationId: "wilson-gym",
-    status: "At the gym",
-    leavingAt: "6:00 PM",
-    nextBreakIn: "2 hours"
-  },
-  {
-    name: "Sebastian",
-    avatar: "avatars/Sebastian.png",
-    locationId: "edens-quad(2A)",
-    status: "Sleeping",
-    leavingAt: "6:00 PM",
-    nextBreakIn: "2 hours"
-  }
-];
+const AVATAR_SIZE = 64;
 
-people.forEach(person => {
+async function loadUsersOnMap() {
+  try {
+    const usersSnapshot = await getDocs(
+      collection(db, "users")
+    );
+
+    usersSnapshot.forEach((docSnap) => {
+      if (
+        auth.currentUser &&
+        docSnap.id === auth.currentUser.uid
+      ) {
+        return;
+      }
+
+      const user = {
+        uid: docSnap.id,
+        ...docSnap.data()
+      };
+
+      addUserMarker(user);
+    });
+
+  } catch (error) {
+    console.error("Error loading users on map:", error);
+  }
+}
+
+function addUserMarker(user) {
   const personLocation = locations.find(
-    location => location.id === person.locationId
+    location => location.id === user.locationId
   );
 
-  if (!personLocation) return;
+  if (!personLocation) {
+    console.warn("Location not found for user:", user);
+    return;
+  }
 
   const avatarIcon = L.divIcon({
     className: "avatar-marker",
     html: `
       <div class="avatar-wrapper">
-        <img src="${person.avatar}" alt="${person.name}">
+        <img src="${user.avatar || "avatars/default.png"}" alt="${user.displayName || "User"}">
       </div>
     `,
-    iconSize: [64, 64],
-    iconAnchor: [32, 32],
-    popupAnchor: [0, -32]
+    iconSize: [AVATAR_SIZE, AVATAR_SIZE],
+    iconAnchor: [AVATAR_SIZE / 2, AVATAR_SIZE / 2],
+    popupAnchor: [0, -AVATAR_SIZE / 2]
   });
 
   const popupContent = `
     <div class="person-popup">
-      <h3>${person.name}</h3>
+      <h3>${user.displayName || user.name || "Unknown User"}</h3>
       <p><strong>Where:</strong> ${personLocation.name}</p>
-      <p><strong>Status:</strong> ${person.status}</p>
-      <p><strong>There until:</strong> ${person.leavingAt}</p>
-      <p><strong>Next break in:</strong> ${person.nextBreakIn}</p>
+      <p><strong>Status:</strong> ${user.status || "Unknown"}</p>
+      <p><strong>There until:</strong> ${user.leavingAt || "Unknown"}</p>
+      <p><strong>Next break in:</strong> ${user.nextBreakIn || "Unknown"}</p>
     </div>
   `;
 
-  L.marker(
-    [personLocation.lat, personLocation.lng],
-    { icon: avatarIcon }
-  )
+  L.marker([personLocation.lat, personLocation.lng], {
+    icon: avatarIcon
+  })
     .addTo(map)
     .bindPopup(popupContent);
-});
+}
+
+loadUsersOnMap();
