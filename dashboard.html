@@ -3,11 +3,28 @@
 <head>
     <title>Dashboard</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script type="module">
+
+    import {
+        protectPage
+    } from "./js/auth.js";
+
+    protectPage();
+
+    </script>
 </head>
 
 <body>
 
 <div class="container">
+
+    <div class="user-profile">
+
+        <div id="profileDisplay">
+            Loading...
+        </div>
+
+    </div>
 
     <aside id="sidebar" class="sidebar">
 
