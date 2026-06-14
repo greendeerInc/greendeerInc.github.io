@@ -16,79 +16,139 @@
 
 <body>
 
-<div class="container">
+<nav id="sidebar" class="sidebar">
 
-    <div class="user-profile">
-
-        <div id="profileDisplay">
-            Loading...
-        </div>
-
-    </div>
-
-    <aside id="sidebar" class="sidebar">
-
-        <div class="logo">
-            Duke Portal
-        </div>
-
-        <ul class="nav-links">
-    <li>
-        <a href="dashboard.html">
-            🏠 <span class="nav-text">Dashboard</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="page1.html">
-            📄 <span class="nav-text">Page 1</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="page2.html">
-            ⚙️ <span class="nav-text">Page 2</span>
-        </a>
-    </li>
-</ul>
-
-    </aside>
-
-    <main class="main-content">
-
-        <div class="topbar">
+        <div class="sidebar-header">
 
             <button
-                id="menuBtn"
-                class="menu-btn">
+                id="sidebarToggle"
+                class="sidebar-toggle">
+
                 ☰
+
             </button>
 
+            <span class="sidebar-title">
+                Duke Portal
+            </span>
+
+        </div>
+
+        <div class="sidebar-content">
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+                data-page="dashboard">
+
+                <span class="icon">🏠</span>
+
+                <span class="label">
+                    Dashboard
+                </span>
+
+            </a>
+
+            <a
+                href="profile.html"
+                class="sidebar-link"
+                data-page="profile">
+
+                <span class="icon">👤</span>
+
+                <span class="label">
+                    Profile
+                </span>
+
+            </a>
+
+            <a
+                href="page1.html"
+                class="sidebar-link"
+                data-page="page1">
+
+                <span class="icon">📄</span>
+
+                <span class="label">
+                    Page 1
+                </span>
+
+            </a>
+
+            <a
+                href="page2.html"
+                class="sidebar-link"
+                data-page="page2">
+
+                <span class="icon">⚙️</span>
+
+                <span class="label">
+                    Page 2
+                </span>
+
+            </a>
+
+        </div>
+
+        <div class="sidebar-footer">
+
             <button
-                onclick="logout()"
-                class="menu-btn">
+                id="logoutBtn"
+                class="logout-btn">
+
                 Logout
+
             </button>
 
         </div>
+
+    </nav>
+
+<div class="container">
+  
+    <main class="main-content">
 
         <div class="card">
 
             <h1>Dashboard</h1>
 
-            <br>
+        </div>
 
-            <button
-                onclick="saveSampleData()"
-                class="menu-btn">
-                Save Firestore Data
-            </button>
+    <div class="card">
+
+        <div class="dashboard-header">
+
+            <h1>Members</h1>
 
         </div>
+
+        <div id="usersContainer"></div>
+
+    </div>
+
+    <div class="user-card">
+
+        <img src="avatars/3.png">
+
+        <div>
+
+            <h3>Mark</h3>
+
+            <p>Working on ECE homework</p>
+
+        </div>
+
+    </div>
 
     </main>
 
 </div>
+
+<script type="module"
+        src="js/sidebar.js">
+</script>
+
+<script type="module" src="js/dashboard.js"></script>
 
 <script type="module">
     import { protectPage } from "./js/auth.js";
