@@ -7,73 +7,101 @@
 
 <body>
 
+<nav id="sidebar" class="sidebar">
+
+        <div class="sidebar-header">
+
+            <button
+                id="sidebarToggle"
+                class="sidebar-toggle">
+
+                ☰
+
+            </button>
+
+            <span class="sidebar-title">
+                Duke Portal
+            </span>
+
+        </div>
+
+        <div class="sidebar-content">
+
+            <a
+                href="dashboard.html"
+                class="sidebar-link"
+                data-page="dashboard">
+
+                <span class="icon">🏠</span>
+
+                <span class="label">
+                    Dashboard
+                </span>
+
+            </a>
+
+            <a
+                href="profile.html"
+                class="sidebar-link"
+                data-page="profile">
+
+                <span class="icon">👤</span>
+
+                <span class="label">
+                    Profile
+                </span>
+
+            </a>
+
+            <a
+                href="locations.html"
+                class="sidebar-link"
+                data-page="locations">
+
+                <span class="icon">📄</span>
+
+                <span class="label">
+                    Locations
+                </span>
+
+            </a>
+
+            <a
+                href="page2.html"
+                class="sidebar-link"
+                data-page="page2">
+
+                <span class="icon">⚙️</span>
+
+                <span class="label">
+                    Page 2
+                </span>
+
+            </a>
+
+        </div>
+
+        <div class="sidebar-footer">
+
+            <button
+                id="logoutBtn"
+                class="logout-btn">
+
+                Logout
+
+            </button>
+
+        </div>
+
+</nav>
+
 <div class="container">
-
-    <div class="user-profile">
-
-        <div id="profileDisplay">
-            Loading...
-        </div>
-
-    </div>
-
-    <aside id="sidebar" class="sidebar">
-
-        <div class="logo">
-            Duke Portal
-        </div>
-
-        <ul class="nav-links">
-    <li>
-        <a href="dashboard.html">
-            🏠 <span class="nav-text">Dashboard</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="page1.html">
-            📄 <span class="nav-text">Page 1</span>
-        </a>
-    </li>
-
-    <li>
-        <a href="page2.html">
-            ⚙️ <span class="nav-text">Page 2</span>
-        </a>
-    </li>
-</ul>
-
-    </aside>
 
     <main class="main-content">
 
-        <div class="topbar">
-
-            <button
-                id="menuBtn"
-                class="menu-btn">
-                ☰
-            </button>
-
-            <button
-                onclick="logout()"
-                class="menu-btn">
-                Logout
-            </button>
-
-        </div>
-
         <div class="card">
 
-            <h1>Dashboard</h1>
-
-            <br>
-
-            <button
-                onclick="saveSampleData()"
-                class="menu-btn">
-                Save Firestore Data
-            </button>
+            <h1>Edit Profile</h1>
 
         </div>
 
@@ -110,6 +138,10 @@
     </main>
 
 </div>
+
+<script type="module"
+        src="js/sidebar.js">
+</script>
 
 <script type="module" src="js/profile.js"></script>
 
