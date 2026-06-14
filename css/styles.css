@@ -498,4 +498,14 @@ body {
     .sidebar.collapsed ~ .container {
         margin-left: 70px;
     }
+    
+    .sidebar-toggle {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-toggle {
+        display: block;
+    }
 }
