@@ -18,7 +18,7 @@ const avatarIcon = L.divIcon({
   className: "avatar-marker",
   html: `
     <div class="avatar-wrapper">
-      <img src="avatars/2.png" alt="avatar">
+      <img src="avatars/Anna.png" alt="avatar">
     </div>
   `,
   iconSize: [32, 32],     // smaller marker
