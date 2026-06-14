@@ -1,100 +1,42 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="css/styles.css">
-</head>
+    <title>Update Profile | DukeLink</title>
 
+    <link rel="stylesheet" href="css/profile.css">
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 <body>
 
-    <nav id="sidebar" class="sidebar collapsed">
+    <div class="background-glow"></div>
 
-        <div class="sidebar-header">
-
-            <button id="sidebarToggle" class="sidebar-toggle">
-
-                ☰
-
-            </button>
-
-            <span class="sidebar-title">
-                Duke Portal
-            </span>
-
+    <header class="topbar">
+        <div class="logo-section">
+            <h1>DukeLink</h1>
+            <span>Connected Campus</span>
         </div>
 
-        <div class="sidebar-content">
-
-            <a href="dashboard.html" class="sidebar-link" data-page="dashboard">
-
-                <span class="icon">🏠</span>
-
-                <span class="label">
-                    Dashboard
-                </span>
-
-            </a>
-
-            <a href="profile.html" class="sidebar-link" data-page="profile">
-
-                <span class="icon">👤</span>
-
-                <span class="label">
-                    Profile
-                </span>
-
-            </a>
-
-            <a href="locations.html" class="sidebar-link" data-page="locations">
-
-                <span class="icon">📄</span>
-
-                <span class="label">
-                    Locations
-                </span>
-
-            </a>
-
-            <a href="page2.html" class="sidebar-link" data-page="page2">
-
-                <span class="icon">⚙️</span>
-
-                <span class="label">
-                    Page 2
-                </span>
-
-            </a>
-
+        <div class="user-info">
+            <span id="currentUserName">Loading...</span>
         </div>
+    </header>
 
-        <div class="sidebar-footer">
-
-            <button id="logoutBtn" class="logout-btn">
-
-                Logout
-
-            </button>
-
-        </div>
-
-    </nav>
-
-    <div class="container">
+    <main class="dashboard-container">
 
         <main class="main-content">
 
-            <div class="card">
-
-                <h1>Edit Profile</h1>
-
-            </div>
-
             <div class="profile-card">
 
-                <h1>My Profile</h1>
+                <h1>Edit Profile</h1>
 
                 <h3>Select Avatar</h3>
 
@@ -119,20 +61,40 @@
 
         </main>
 
-    </div>
+    </main>
 
-    <script type="module" src="js/sidebar.js">
-    </script>
+    <link rel="stylesheet" href="css/footer.css">
+    <footer class="app-footer">
+
+        <a href="info.html" class="footer-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Info</span>
+        </a>
+
+        <a href="study.html" class="footer-item">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Study</span>
+        </a>
+
+        <a href="dashboard.html" class="footer-item footer-home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="locations.html" class="footer-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Map</span>
+        </a>
+
+        <a href="profile.html" class="footer-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </footer>
+
+    <script src="js/footer.js"></script>
 
     <script type="module" src="js/profile.js"></script>
 
-    <script type="module">
-        import { protectPage } from "./js/auth.js";
-        protectPage();
-    </script>
-
-    <script type="module" src="js/app.js"></script>
-
 </body>
-
 </html>

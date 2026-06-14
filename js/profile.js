@@ -1,18 +1,17 @@
-import { auth, db }
-    from "./firebase-config.js";
-
+import { protectPage } from "./auth.js";
+import { db, auth } from "./firebase-config.js";
 import {
+    collection,
+    getDocs,
     doc,
-    getDoc,
-    setDoc,
-    serverTimestamp
-}
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    getDoc
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-import {
-    onAuthStateChanged
-}
-    from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+protectPage();
+
 
 let selectedAvatar = "1.png";
 
@@ -45,7 +44,7 @@ function buildAvatarPicker() {
 
     avatarGrid.innerHTML = "";
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 6; i++) {
 
         const avatar =
             document.createElement(
