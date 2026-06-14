@@ -2,14 +2,48 @@ import { protectPage } from "./auth.js";
 import { db, auth } from "./firebase-config.js";
 import {
     collection,
+    doc,
     getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import { onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 protectPage();
 
 const usersGrid = document.getElementById("usersGrid");
 const currentUserName = document.getElementById("currentUserName");
+
+async function loadCurrentUser() {
+
+    if (!auth.currentUser) return;
+
+    try {
+
+        const userDoc = await getDoc(
+            doc(db, "users", auth.currentUser.uid)
+        );
+
+        if (!userDoc.exists()) {
+            currentUserName.textContent = "Unknown User";
+            return;
+        }
+
+        const userData = userDoc.data();
+
+        currentUserName.textContent =
+            userData.profileName || "User";
+
+    } catch (error) {
+
+        console.error(
+            "Error loading current user:",
+            error
+        );
+
+        currentUserName.textContent = "User";
+    }
+}
 
 function timeAgo(timestamp) {
 
@@ -72,28 +106,21 @@ async function loadUsers() {
 
         usersSnapshot.forEach((docSnap) => {
 
-            const userData = docSnap.data();
+            // Skip current user
+            if (
+                auth.currentUser &&
+                docSnap.id === auth.currentUser.uid
+            ) {
+                return;
+            }
 
             const user = {
                 uid: docSnap.id,
-                profileName: userData.profileName || "Unknown User",
-                status: userData.status || "Available",
-                avatar: userData.avatar || "default.png",
-                email: userData.email || "",
-                createdAt: userData.createdAt,
-                lastUpdated: userData.lastUpdated
+                ...docSnap.data()
             };
 
-            usersGrid.innerHTML += createUserCard(user);
-
-            if (
-                auth.currentUser &&
-                user.uid === auth.currentUser.uid
-            ) {
-                currentUserName.textContent =
-                    user.profileName;
-            }
-
+            usersGrid.innerHTML +=
+                createUserCard(user);
         });
 
     } catch (error) {
@@ -110,4 +137,17 @@ async function loadUsers() {
         `;
     }
 }
-loadUsers();
+
+console.log("Current User:", auth.currentUser);
+console.log("Current User:", auth.currentUser);
+
+window.addEventListener("DOMContentLoaded", async () => {
+
+    await auth.authStateReady();
+
+    if (!auth.currentUser) return;
+
+    await loadCurrentUser(auth.currentUser);
+    await loadUsers(auth.currentUser);
+
+});
