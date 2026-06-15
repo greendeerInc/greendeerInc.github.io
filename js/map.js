@@ -1,9 +1,16 @@
-import { locations } from "./locations.js";
-import { db, auth } from "./firebase.js";
+import { protectPage } from "./auth.js";
+import { db, auth } from "./firebase-config.js";
 import {
-  collection,
-  getDocs
+    collection,
+    getDocs,
+    doc,
+    getDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+import { onAuthStateChanged }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+protectPage();
 
 const map = L.map("map").setView(
   [36.0015, -78.9395],

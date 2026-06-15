@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locations</title>
 
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/locations.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
@@ -29,93 +33,42 @@
 
 <body>
 
-    <nav id="sidebar" class="sidebar collapsed">
-
-        <div class="sidebar-header">
-
-            <button id="sidebarToggle" class="sidebar-toggle">
-
-                ☰
-
-            </button>
-
-            <span class="sidebar-title">
-                Duke Portal
-            </span>
-
-        </div>
-
-        <div class="sidebar-content">
-
-            <a href="dashboard.html" class="sidebar-link" data-page="dashboard">
-
-                <span class="icon">🏠</span>
-
-                <span class="label">
-                    Dashboard
-                </span>
-
-            </a>
-
-            <a href="profile.html" class="sidebar-link" data-page="profile">
-
-                <span class="icon">👤</span>
-
-                <span class="label">
-                    Profile
-                </span>
-
-            </a>
-
-            <a href="locations.html" class="sidebar-link" data-page="locations">
-
-                <span class="icon">📄</span>
-
-                <span class="label">
-                    Locations
-                </span>
-
-            </a>
-
-            <a href="page2.html" class="sidebar-link" data-page="page2">
-
-                <span class="icon">⚙️</span>
-
-                <span class="label">
-                    Page 2
-                </span>
-
-            </a>
-
-        </div>
-
-        <div class="sidebar-footer">
-
-            <button id="logoutBtn" class="logout-btn">
-
-                Logout
-
-            </button>
-
-        </div>
-
-    </nav>
-
     <div class="container">
-
         <main class="main-content">
             <div id="map"></div>
         </main>
     </div>
 
+    <link rel="stylesheet" href="css/footer.css">
+    <footer class="app-footer">
 
-    <script type="module" src="js/sidebar.js">
-    </script>
+        <a href="schedule.html" class="footer-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Schedule</span>
+        </a>
 
-    <script type="module">
-        import { protectPage } from "./js/auth.js";
-        protectPage();
-    </script>
+        <a href="study.html" class="footer-item">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Study</span>
+        </a>
+
+        <a href="dashboard.html" class="footer-item footer-home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="locations.html" class="footer-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Map</span>
+        </a>
+
+        <a href="profile.html" class="footer-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </footer>
+
+    <script src="js/footer.js"></script>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script type="module" src="js/map.js"></script>

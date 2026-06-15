@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DukeLink Dashboard</title>
+
+    <link rel="stylesheet" href="css/add.css">
+    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <header class="topbar">
+        <div class="logo-section">
+            <h1>DukeLink</h1>
+            <span>Connected Campus</span>
+        </div>
+
+        <div class="user-info">
+            <span id="currentUserName">Loading...</span>
+        </div>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="dashboard-header">
+            <h2>Add Events</h2>
+        </section>
+
+        <div class="info-container">
+
+        <form id="eventForm" class="event-form">
+
+            <input
+                type="text"
+                id="eventTitle"
+                placeholder="Event Title"
+                required
+            >
+
+            <input
+                type="date"
+                id="eventDate"
+                required
+            >
+
+            <input
+                type="time"
+                id="startTime"
+                required
+            >
+
+            <input
+                type="time"
+                id="endTime"
+                required
+            >
+
+            <input
+                list="dukeBuildings"
+                id="eventLocation"
+                placeholder="Location"
+                required
+            >
+
+            <datalist id="dukeBuildings">
+                <option value="Hudson Hall">
+                <option value="Wilkinson Building">
+                <option value="Gross Hall">
+                <option value="Teer Building">
+                <option value="Fitzpatrick Center">
+                <option value="Perkins Library">
+                <option value="Bostock Library">
+                <option value="Bryan Center">
+                <option value="Penn Pavilion">
+                <option value="Wilson Recreation Center">
+                <option value="French Family Science Center">
+                <option value="LSRC">
+                <option value="West Campus Union">
+                <option value="East Duke Building">
+                <option value="Sanford School">
+                <option value="Cameron Indoor Stadium">
+            </datalist>
+
+            <select id="eventType" required>
+                <option value="">Select Type</option>
+                <option value="class">Class</option>
+                <option value="club">Club</option>
+                <option value="meeting">Meeting</option>
+                <option value="other">Other</option>
+            </select>
+
+            <div class="repeat-section">
+
+                <label>Repeat On:</label>
+
+                <div class="days-grid">
+
+                    <label><input type="checkbox" value="Sunday"> Sun</label>
+                    <label><input type="checkbox" value="Monday"> Mon</label>
+                    <label><input type="checkbox" value="Tuesday"> Tue</label>
+                    <label><input type="checkbox" value="Wednesday"> Wed</label>
+                    <label><input type="checkbox" value="Thursday"> Thu</label>
+                    <label><input type="checkbox" value="Friday"> Fri</label>
+                    <label><input type="checkbox" value="Saturday"> Sat</label>
+
+                </div>
+
+            </div>
+
+            <button
+                type="submit"
+                class="save-event-btn"
+            >
+                Save Event
+            </button>
+
+        </form>
+
+        <div id="eventMessage"></div>
+
+    </div>
+
+    </main>
+
+    <link rel="stylesheet" href="css/footer.css">
+    <footer class="app-footer">
+
+        <a href="schedule.html" class="footer-item">
+            <i class="fa-solid fa-circle-info"></i>
+            <span>Schedule</span>
+        </a>
+
+        <a href="study.html" class="footer-item">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Study</span>
+        </a>
+
+        <a href="dashboard.html" class="footer-item footer-home">
+            <i class="fa-solid fa-house"></i>
+        </a>
+
+        <a href="locations.html" class="footer-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>Map</span>
+        </a>
+
+        <a href="profile.html" class="footer-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </footer>
+
+    <script src="js/footer.js"></script>
+
+    <script type="module" src="js/add.js"></script>
+
+</body>
+</html>

@@ -87,33 +87,6 @@ body {
     color: var(--muted);
 }
 
-#saveProfileBtn {
-    width: 100%;
-    max-width: 400px;
-    display: block;
-    margin: 30px auto 0;
-    padding: 16px 32px;
-    background: linear-gradient(135deg, var(--accent), var(--duke-light));
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(62, 166, 255, 0.3);
-}
-
-#saveProfileBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(62, 166, 255, 0.4);
-}
-
-#saveProfileBtn:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 10px rgba(62, 166, 255, 0.3);
-}
-
 .info-container {
 
     max-width: 700px;
@@ -121,39 +94,64 @@ body {
     padding: 25px;
 }
 
-.info-container h2 {
-
-    color: white;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
 .event-form {
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 15px;
 }
 
 .event-form input,
 .event-form select {
 
     padding: 14px;
+
     border-radius: 12px;
+
     border: 1px solid rgba(255,255,255,.15);
 
     background: rgba(255,255,255,.05);
+
     color: white;
 
     font-size: 1rem;
 }
 
-.event-form input:focus,
-.event-form select:focus {
+.repeat-section {
 
-    outline: none;
+    padding: 15px;
 
-    border-color: #00539B;
+    border-radius: 12px;
+
+    background: rgba(255,255,255,.05);
+}
+
+.repeat-section label {
+
+    color: white;
+}
+
+.days-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+
+    margin-top: 12px;
+}
+
+.days-grid label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    cursor: pointer;
 }
 
 .save-event-btn {
@@ -161,29 +159,33 @@ body {
     padding: 15px;
 
     border: none;
+
     border-radius: 12px;
 
-    background: linear-gradient(
-        135deg,
-        #00539B,
-        #012169
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #00539B,
+            #012169
+        );
 
     color: white;
-    font-weight: 600;
-    cursor: pointer;
 
-    transition: .2s;
+    font-weight: 600;
+
+    cursor: pointer;
 }
 
 .save-event-btn:hover {
 
-    transform: translateY(-2px);
+    opacity: .9;
 }
 
 #eventMessage {
 
-    margin-top: 15px;
     text-align: center;
+
+    margin-top: 15px;
+
     color: #3ea6ff;
 }
