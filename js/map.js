@@ -1,3 +1,4 @@
+import { locations } from "./locations.js";
 import { protectPage } from "./auth.js";
 import { db, auth } from "./firebase-config.js";
 import {
@@ -52,12 +53,23 @@ async function loadUsersOnMap() {
 }
 
 function addUserMarker(user) {
+
+  if (!user.locationId) {
+    console.warn(
+      `${user.profileName} has no locationId`
+    );
+    return;
+  }
+
   const personLocation = locations.find(
     location => location.id === user.locationId
   );
 
   if (!personLocation) {
-    console.warn("Location not found for user:", user);
+    console.warn(
+      "Location not found:",
+      user.locationId
+    );
     return;
   }
 
@@ -65,29 +77,28 @@ function addUserMarker(user) {
     className: "avatar-marker",
     html: `
       <div class="avatar-wrapper">
-        <img src="${user.avatar || "avatars/default.png"}" alt="${user.displayName || "User"}">
+        <img
+          src="avatars/${user.avatar || "1.png"}"
+          alt="${user.profileName || "User"}"
+        >
       </div>
     `,
-    iconSize: [AVATAR_SIZE, AVATAR_SIZE],
-    iconAnchor: [AVATAR_SIZE / 2, AVATAR_SIZE / 2],
-    popupAnchor: [0, -AVATAR_SIZE / 2]
+    iconSize: [64, 64],
+    iconAnchor: [32, 32]
   });
 
-  const popupContent = `
+  L.marker(
+    [personLocation.lat, personLocation.lng],
+    { icon: avatarIcon }
+  )
+  .addTo(map)
+  .bindPopup(`
     <div class="person-popup">
-      <h3>${user.displayName || user.name || "Unknown User"}</h3>
-      <p><strong>Where:</strong> ${personLocation.name}</p>
-      <p><strong>Status:</strong> ${user.status || "Unknown"}</p>
-      <p><strong>There until:</strong> ${user.leavingAt || "Unknown"}</p>
-      <p><strong>Next break in:</strong> ${user.nextBreakIn || "Unknown"}</p>
+      <h3>${user.profileName || "Unknown User"}</h3>
+      <p>${personLocation.name}</p>
+      <p>${user.status || "No status"}</p>
     </div>
-  `;
-
-  L.marker([personLocation.lat, personLocation.lng], {
-    icon: avatarIcon
-  })
-    .addTo(map)
-    .bindPopup(popupContent);
+  `);
 }
 
 loadUsersOnMap();
